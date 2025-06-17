@@ -1,9 +1,17 @@
-import { View, Text } from "react-native";
+import { useEffect } from "react";
+import { useRouter } from "expo-router";
 
-export default function Landing() {
-  return (
-    <View className="bg-blue-800 p-4 justify-center items-center flex-1">
-      <Text className="text-6xl font-bold text-white">Fitly</Text>
-    </View>
-  );
+export default function Index() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Use requestAnimationFrame to defer navigation until after layout mount
+    const frame = requestAnimationFrame(() => {
+      router.replace("/landing");
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  return null;
 }
